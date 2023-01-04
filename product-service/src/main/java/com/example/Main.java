@@ -11,7 +11,7 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.util.Arrays;
 import java.util.List;
-
+//根据数据库数据自动创建实体类
 public class Main {
     public static void main(String[] args) {
         //创建对象
