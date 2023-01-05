@@ -7,13 +7,11 @@ import com.example.service.ProductCategoryService;
 import com.example.service.ProductInfoService;
 import com.example.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 
+import javax.swing.text.StyledEditorKit;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -49,7 +47,16 @@ public class BuyerProductController {
         return this.productInfoService.findPriceById(id);
 
     }
-
-
+    @GetMapping("/findById/{id}")
+    public ProductInfo findById(@PathVariable("id") Integer id){
+        return this.productInfoService.getById(id);
+    }
+    @PutMapping("/subStockById/{id}/{quantity}")
+    public Boolean subStockById(@PathVariable("id") Integer id
+        ,@PathVariable("quantity") Integer quantity){
+        return this.productInfoService.subStockById(id, quantity);
 }
+
+
+    }
 

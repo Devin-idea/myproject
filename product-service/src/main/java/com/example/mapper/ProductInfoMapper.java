@@ -15,4 +15,7 @@ import java.math.BigDecimal;
  */
 public interface ProductInfoMapper extends BaseMapper<ProductInfo> {
     public BigDecimal findPriceById(Integer id);
+    public Integer findStockById(Integer id);
+
+    public int updateStock(Integer id, Integer stock);
 }
