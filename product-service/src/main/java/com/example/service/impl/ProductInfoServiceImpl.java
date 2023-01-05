@@ -4,7 +4,10 @@ import com.example.entity.ProductInfo;
 import com.example.mapper.ProductInfoMapper;
 import com.example.service.ProductInfoService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -16,5 +19,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, ProductInfo> implements ProductInfoService {
-
+    @Autowired
+    private ProductInfoMapper productInfoMapper;
+    @Override
+    public BigDecimal findPriceById(Integer id) {
+        return this.productInfoMapper.findPriceById(id);
+    }
 }

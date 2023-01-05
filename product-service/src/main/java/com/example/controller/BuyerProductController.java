@@ -1,15 +1,20 @@
 package com.example.controller;
 
 
+import com.example.entity.ProductCategory;
+import com.example.entity.ProductInfo;
 import com.example.service.ProductCategoryService;
+import com.example.service.ProductInfoService;
 import com.example.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -26,6 +31,8 @@ public class BuyerProductController {
 
     @Autowired
     private ProductCategoryService productCategoryService;
+    @Autowired
+    private ProductInfoService productInfoService;
 
     @GetMapping("/list")
     public ResultVO list(){
@@ -36,6 +43,13 @@ public class BuyerProductController {
         return resultVO;
 
     }
+    @GetMapping("/findPriceById/{id}")
+    public BigDecimal findPriceById(@PathVariable("id") Integer id){
+//        ProductInfo productInfo = this.productInfoService.getById(id);
+        return this.productInfoService.findPriceById(id);
+
+    }
+
 
 }
 

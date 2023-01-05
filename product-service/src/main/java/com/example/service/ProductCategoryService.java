@@ -4,6 +4,7 @@ import com.example.entity.ProductCategory;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.vo.BuyerProductCategoryVO;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -16,5 +17,6 @@ import java.util.List;
  */
 public interface ProductCategoryService extends IService<ProductCategory> {
     public List<BuyerProductCategoryVO> buyerList();
+
 
 }
