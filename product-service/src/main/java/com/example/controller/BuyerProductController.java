@@ -32,7 +32,7 @@ public class BuyerProductController {
         ResultVO resultVO = new ResultVO<>();
         resultVO.setCode(0);
         resultVO.setMsg("success");
-        resultVO.setData(this.productCategoryService.list());
+        resultVO.setData(this.productCategoryService.buyerList());
         return resultVO;
 
     }
