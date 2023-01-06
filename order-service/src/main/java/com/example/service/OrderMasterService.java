@@ -2,6 +2,7 @@ package com.example.service;
 
 import com.example.entity.OrderMaster;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.form.BuyerOrderForm;
 
 /**
  * <p>
@@ -12,5 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2023-01-05
  */
 public interface OrderMasterService extends IService<OrderMaster> {
+    public boolean create(BuyerOrderForm buyerOrderForm);
 
 }
