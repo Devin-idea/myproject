@@ -5,6 +5,7 @@ import com.example.entity.ProductCategory;
 import com.example.entity.ProductInfo;
 import com.example.service.ProductCategoryService;
 import com.example.service.ProductInfoService;
+import com.example.util.ResultVOUtil;
 import com.example.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,11 +35,8 @@ public class BuyerProductController {
 
     @GetMapping("/list")
     public ResultVO list(){
-        ResultVO resultVO = new ResultVO<>();
-        resultVO.setCode(0);
-        resultVO.setMsg("success");
-        resultVO.setData(this.productCategoryService.buyerList());
-        return resultVO;
+
+        return ResultVOUtil.success(this.productCategoryService.buyerList());
 
     }
     @GetMapping("/findPriceById/{id}")

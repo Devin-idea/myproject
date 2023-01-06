@@ -13,6 +13,6 @@ import com.example.form.BuyerOrderForm;
  * @since 2023-01-05
  */
 public interface OrderMasterService extends IService<OrderMaster> {
-    public boolean create(BuyerOrderForm buyerOrderForm);
+    public String create(BuyerOrderForm buyerOrderForm);
 
 }
