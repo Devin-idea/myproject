@@ -1,5 +1,6 @@
 package com.example.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.entity.OrderDetail;
 import com.example.entity.OrderMaster;
 import com.example.entity.ProductInfo;
@@ -10,12 +11,15 @@ import com.example.mapper.OrderDetailMapper;
 import com.example.mapper.OrderMasterMapper;
 import com.example.service.OrderMasterService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.vo.BuyerOrderDetailVO;
+import com.example.vo.BuyerOrderMasterVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,5 +77,26 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
 
         }
         return orderMaster.getOrderId();
+    }
+
+    @Override
+    public BuyerOrderMasterVO detail(Integer buyerId, String orderId) {
+        QueryWrapper<OrderMaster> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("buyer_openid",buyerId);
+        queryWrapper.eq("order_id",orderId);
+        OrderMaster orderMaster = this.orderMasterMapper.selectOne(queryWrapper);
+        BuyerOrderMasterVO orderMasterVO = new BuyerOrderMasterVO();
+        BeanUtils.copyProperties(orderMaster,orderMasterVO);
+        QueryWrapper<OrderDetail> queryWrapper1 = new QueryWrapper<>();
+        queryWrapper1.eq("order_id",orderId);
+        List<OrderDetail> orderDetails = this.orderDetailMapper.selectList(queryWrapper1);
+        List<BuyerOrderDetailVO> buyerOrderDetailVOList = new ArrayList<>();
+        for (OrderDetail orderDetail : orderDetails) {
+            BuyerOrderDetailVO detailVO = new BuyerOrderDetailVO();
+            BeanUtils.copyProperties(orderDetail,detailVO);
+            buyerOrderDetailVOList.add(detailVO);
+        }
+        orderMasterVO.setOrderDetailList(buyerOrderDetailVOList);
+        return orderMasterVO;
     }
 }

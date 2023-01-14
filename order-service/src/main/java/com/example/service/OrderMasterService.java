@@ -3,6 +3,7 @@ package com.example.service;
 import com.example.entity.OrderMaster;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.example.form.BuyerOrderForm;
+import com.example.vo.BuyerOrderMasterVO;
 
 /**
  * <p>
@@ -14,5 +15,6 @@ import com.example.form.BuyerOrderForm;
  */
 public interface OrderMasterService extends IService<OrderMaster> {
     public String create(BuyerOrderForm buyerOrderForm);
+    public BuyerOrderMasterVO detail(Integer buyerId,String orderId);
 
 }

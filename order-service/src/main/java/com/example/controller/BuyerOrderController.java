@@ -50,5 +50,13 @@ public class BuyerOrderController {
         return ResultVOUtil.success(records);
     }
 
+    @GetMapping("detail/{buyerId}/{orderId}")
+    public ResultVO detail(
+            @PathVariable("buyerId") Integer buyerId,
+            @PathVariable("orderId") String orderId){
+        return ResultVOUtil.success(this.orderMasterService.detail(buyerId, orderId));
+
+    }
+
 }
 
