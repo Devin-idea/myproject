@@ -1,19 +1,19 @@
 package com.example.controller;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.entity.OrderMaster;
 import com.example.form.BuyerOrderForm;
 import com.example.service.OrderMasterService;
 import com.example.util.ResultVOUtil;
 import com.example.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -37,6 +37,17 @@ public class BuyerOrderController {
         return ResultVOUtil.success(map);
 
 
+    }
+    @GetMapping("/list/{buyerId}/{page}/{size}  ")
+    public ResultVO list(
+            @PathVariable("buyerId") Integer buyerId,
+            @PathVariable ("page") Integer page,
+            @PathVariable("size") Integer size){
+
+        Page<OrderMaster> orderMasterPage = new Page<>(page,size);
+        Page<OrderMaster> resultPage = this.orderMasterService.page(orderMasterPage);
+        List<OrderMaster> records = resultPage.getRecords();
+        return ResultVOUtil.success(records);
     }
 
 }
