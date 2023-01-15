@@ -13,4 +13,8 @@
         select product_stock from product_info where product_id = #{id}
     </select>
 
+    <update id="addStock">
+        update product_info set product_stock = product_stock + #{param2} where product_id = #{param1}
+    </update>
+
 </mapper>

@@ -99,4 +99,26 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
         orderMasterVO.setOrderDetailList(buyerOrderDetailVOList);
         return orderMasterVO;
     }
+
+    @Override
+    public boolean cancel(Integer buyerId, String orderId) {
+        //加庫存
+        QueryWrapper<OrderDetail> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("order_id", orderId);
+        List<OrderDetail> orderDetailList = this.orderDetailMapper.selectList(queryWrapper);
+        for (OrderDetail orderDetail : orderDetailList) {
+            this.productFeign.addStockById(orderDetail.getProductId(),orderDetail.getProductQuantity());
+        }
+        return this.orderMasterMapper.cancel(buyerId,orderId);
+    }
+
+    @Override
+    public boolean finish(String orderId) {
+        return this.orderMasterMapper.finish(orderId);
+    }
+
+    @Override
+    public boolean pay(Integer buyerId, String orderId) {
+        return this.orderMasterMapper.pay(buyerId, orderId);
+    }
 }

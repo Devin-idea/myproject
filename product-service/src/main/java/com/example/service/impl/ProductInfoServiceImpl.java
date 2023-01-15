@@ -46,4 +46,10 @@ public class ProductInfoServiceImpl extends ServiceImpl<ProductInfoMapper, Produ
         reentrantLock.unlock();
         return true;
     }
+
+    @Override
+    public Boolean addStock(Integer id, Integer quantity) {
+        this.productInfoMapper.addStock(id,quantity);
+        return true;
+    }
 }

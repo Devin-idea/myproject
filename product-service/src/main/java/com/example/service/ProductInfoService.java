@@ -16,5 +16,6 @@ import java.math.BigDecimal;
 public interface ProductInfoService extends IService<ProductInfo> {
     public BigDecimal findPriceById(Integer id);
     public Boolean subStockById(Integer id, Integer quantity);
+    public Boolean addStock(Integer id, Integer quantity);
 
 }

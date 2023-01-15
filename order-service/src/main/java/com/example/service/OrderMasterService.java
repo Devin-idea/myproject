@@ -16,5 +16,9 @@ import com.example.vo.BuyerOrderMasterVO;
 public interface OrderMasterService extends IService<OrderMaster> {
     public String create(BuyerOrderForm buyerOrderForm);
     public BuyerOrderMasterVO detail(Integer buyerId,String orderId);
+    public boolean cancel (Integer buyerId,String orderId);
+    public boolean finish (String orderId);
+    public boolean pay (Integer buyerId,String orderId);
+
 
 }

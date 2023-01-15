@@ -34,27 +34,36 @@ public class BuyerProductController {
     private ProductInfoService productInfoService;
 
     @GetMapping("/list")
-    public ResultVO list(){
+    public ResultVO list() {
 
         return ResultVOUtil.success(this.productCategoryService.buyerList());
 
     }
+
     @GetMapping("/findPriceById/{id}")
-    public BigDecimal findPriceById(@PathVariable("id") Integer id){
+    public BigDecimal findPriceById(@PathVariable("id") Integer id) {
 //        ProductInfo productInfo = this.productInfoService.getById(id);
         return this.productInfoService.findPriceById(id);
 
     }
+
     @GetMapping("/findById/{id}")
-    public ProductInfo findById(@PathVariable("id") Integer id){
+    public ProductInfo findById(@PathVariable("id") Integer id) {
         return this.productInfoService.getById(id);
     }
+
     @PutMapping("/subStockById/{id}/{quantity}")
     public Boolean subStockById(@PathVariable("id") Integer id
-        ,@PathVariable("quantity") Integer quantity){
+            , @PathVariable("quantity") Integer quantity) {
         return this.productInfoService.subStockById(id, quantity);
-}
+    }
+
+    @PutMapping("/addStockById/{id}/{quantity}")
+    public Boolean addStockById(@PathVariable("id") Integer id
+            , @PathVariable("quantity") Integer quantity) {
+        return this.productInfoService.addStock(id, quantity);
 
 
     }
+}
 

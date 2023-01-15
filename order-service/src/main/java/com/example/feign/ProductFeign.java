@@ -20,4 +20,8 @@ public interface ProductFeign {
     public Boolean subStockById(@PathVariable("id") Integer id
             ,@PathVariable("quantity") Integer quantity);
 
+    @PutMapping("/buyer/product/addStockById/{id}/{quantity}")
+    public Boolean addStockById(@PathVariable("id") Integer id
+            , @PathVariable("quantity") Integer quantity);
+
 }

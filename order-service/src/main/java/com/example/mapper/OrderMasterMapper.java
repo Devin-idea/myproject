@@ -12,5 +12,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2023-01-05
  */
 public interface OrderMasterMapper extends BaseMapper<OrderMaster> {
+    public boolean cancel (Integer buyerId,String orderId);
+    public boolean finish (String orderId);
+    public boolean pay (Integer buyerId,String orderId);
 
 }
