@@ -17,4 +17,12 @@ public class ResultVOUtil {
         resultVO.setMsg(msg);
         return resultVO;
     }
+
+    public static ResultVO failMsg(String msg){
+        ResultVO resultVO = new ResultVO();
+        resultVO.setCode(-1);
+        resultVO.setMsg("失败");
+        resultVO.setData(msg);
+        return resultVO;
+    }
 }

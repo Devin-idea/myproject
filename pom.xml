@@ -20,6 +20,7 @@
         <module>common-service</module>
         <module>product-service</module>
         <module>order-service</module>
+        <module>account-service</module>
     </modules>
     <properties>
         <java.version>8</java.version>

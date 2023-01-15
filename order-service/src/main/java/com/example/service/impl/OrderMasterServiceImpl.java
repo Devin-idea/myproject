@@ -101,6 +101,7 @@ public class OrderMasterServiceImpl extends ServiceImpl<OrderMasterMapper, Order
     }
 
     @Override
+    @Transactional
     public boolean cancel(Integer buyerId, String orderId) {
         //加庫存
         QueryWrapper<OrderDetail> queryWrapper = new QueryWrapper<>();
