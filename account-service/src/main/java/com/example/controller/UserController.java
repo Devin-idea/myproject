@@ -7,10 +7,12 @@ import com.example.exception.ShopException;
 import com.example.form.UserForm;
 import com.example.result.ResponseEnum;
 import com.example.service.UserService;
+import com.example.util.JwtUtil;
 import com.example.util.MD5Util;
 import com.example.util.RegexValidateUtil;
 import com.example.util.ResultVOUtil;
 import com.example.vo.ResultVO;
+import com.example.vo.UserVO;
 import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -70,6 +72,20 @@ public class UserController {
         //密码验证
         if (! MD5Util.getSaltverifyMD5(userForm.getPassword(),one.getPassword())){
             throw new ShopException(ResponseEnum.PASSWORD_ERROR.getMsg());
+
+        }
+        //Token
+        String token = JwtUtil.createToken(one.getUserId(), one.getMobile());
+        UserVO userVO = new UserVO(one.getUserId(),one.getMobile(),one.getPassword(),token);
+
+        return ResultVOUtil.success(userVO);
+    }
+
+    @GetMapping("/checnToken/{token}")
+    public ResultVO checkToken(@PathVariable("token") String token){
+        boolean b = JwtUtil.checkToken(token);
+        if (!b) {
+            throw new ShopException(ResponseEnum.TOKEN_ERROR.getMsg());
 
         }
         return ResultVOUtil.success(null);
