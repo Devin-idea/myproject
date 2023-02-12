@@ -1,6 +1,7 @@
 package com.example.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.entity.OrderMaster;
 import com.example.form.BuyerOrderForm;
@@ -45,7 +46,9 @@ public class BuyerOrderController {
             @PathVariable("size") Integer size){
 
         Page<OrderMaster> orderMasterPage = new Page<>(page,size);
-        Page<OrderMaster> resultPage = this.orderMasterService.page(orderMasterPage);
+        QueryWrapper<OrderMaster> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("buyer_openid",buyerId);
+        Page<OrderMaster> resultPage = this.orderMasterService.page(orderMasterPage,queryWrapper);
         List<OrderMaster> records = resultPage.getRecords();
         return ResultVOUtil.success(records);
     }
